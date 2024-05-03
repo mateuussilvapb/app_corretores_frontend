@@ -32,7 +32,16 @@
             "styles": [
               "src/styles.scss",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css"
+              {
+                "input": "src/scss/themes/theme-light.css",
+                "bundleName": "theme-light",
+                "inject": false
+              },
+              {
+                "input": "src/scss/themes/theme-dark.css",
+                "bundleName": "theme-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           },
