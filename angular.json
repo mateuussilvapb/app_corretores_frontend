@@ -30,7 +30,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/@fortawesome/fontawesome-svg-core/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              {
+                "input": "src/scss/themes/theme-light.css",
+                "bundleName": "theme-light",
+                "inject": false
+              },
+              {
+                "input": "src/scss/themes/theme-dark.css",
+                "bundleName": "theme-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -48,18 +62,86 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.producao.ts"
+                }
+              ]
             },
-            "development": {
+            "localhost": {
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.localhost.ts"
+                }
+              ]
+            },
+            "desenvolvimento": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.desenvolvimento.ts"
+                }
+              ]
+            },
+            "testes": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.testes.ts"
+                }
+              ]
+            },
+            "homologacao": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homologacao.ts"
+                }
+              ]
+            },
+            "producao": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.producao.ts"
+                }
+              ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "localhost"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -67,11 +149,23 @@
             "production": {
               "buildTarget": "app_corretores_frontend:build:production"
             },
-            "development": {
-              "buildTarget": "app_corretores_frontend:build:development"
+            "desenvolvimento": {
+              "buildTarget": "app_corretores_frontend:build:desenvolvimento"
+            },
+            "localhost": {
+              "buildTarget": "app_corretores_frontend:build:localhost"
+            },
+            "homologacao": {
+              "buildTarget": "app_corretores_frontend:build:homologacao"
+            },
+            "producao": {
+              "buildTarget": "app_corretores_frontend:build:producao"
+            },
+            "testes": {
+              "buildTarget": "app_corretores_frontend:build:testes"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "localhost"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -93,7 +187,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/@fortawesome/fontawesome-svg-core/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              {
+                "input": "src/scss/themes/theme-light.css",
+                "bundleName": "theme-light",
+                "inject": false
+              },
+              {
+                "input": "src/scss/themes/theme-dark.css",
+                "bundleName": "theme-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           }
