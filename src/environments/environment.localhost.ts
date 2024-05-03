@@ -1,13 +1,13 @@
 import * as packageJson from '../../package.json';
 
 export const environment = {
-  apiUrl: '',
+  apiUrl: 'http://localhost:8081',
   postLogoutUrl: '',
   keycloak: {
-    url: '',
-    realm: '',
-    clientId: '',
-    acceptablePaths: [],
+    url: 'http://localhost:8080',
+    realm: 'manager',
+    clientId: 'app_segundo',
+    acceptablePaths: ['/public'],
   },
-  packageInfo: packageJson,
+  packageInfo: packageJson,
 };

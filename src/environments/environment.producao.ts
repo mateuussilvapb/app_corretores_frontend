@@ -5,7 +5,7 @@ export const environment = {
   postLogoutUrl: '',
   keycloak: {
     url: '',
-    realm: '',
+    realm: 'manager',
     clientId: '',
     acceptablePaths: [],
   },
