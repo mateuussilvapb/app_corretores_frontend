@@ -18,6 +18,7 @@ import { AppComponent } from 'src/app/app.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { DateConverterInterceptor } from './core/interceptors/date-converter.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -58,7 +59,12 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true,
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DateConverterInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
