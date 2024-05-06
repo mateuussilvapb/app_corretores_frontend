@@ -1,8 +1,8 @@
 //Angular
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 //Externos
 import { MessageModule } from 'primeng/message';
@@ -23,6 +23,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   imports: [
     //Angular
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
 
     //Externos
