@@ -1,5 +1,5 @@
 //Angular
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +17,7 @@ import {
 import { AppComponent } from 'src/app/app.component';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,6 +54,11 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
       multi: true,
       deps: [KeycloakService],
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent],
 })
