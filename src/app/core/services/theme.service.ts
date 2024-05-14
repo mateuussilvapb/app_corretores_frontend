@@ -1,5 +1,9 @@
+//Angular
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+
+//Internos
+import { THEME, THEMES } from 'src/app/core/models/themes';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +13,6 @@ export class ThemeService {
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  private readonly themes: string[] = ['theme-light', 'theme-dark'];
-
   switchTheme() {
     let themeLink = this.document.getElementById(
       'app-corretores'
@@ -18,9 +20,23 @@ export class ThemeService {
 
     if (themeLink) {
       // Alterna entre os temas
-      this.currentThemeIndex =
-        (this.currentThemeIndex + 1) % this.themes.length;
-      themeLink.href = '/' + this.themes[this.currentThemeIndex] + '.css';
+      this.calculateCurrentThemeIndex();
+      themeLink.href = '/' + THEMES[this.currentThemeIndex] + '.css';
     }
+  }
+
+  getCurrentTheme() {
+    return THEMES[this.currentThemeIndex];
+  }
+
+  get getIconTheme() {
+    if (this.getCurrentTheme() === THEME.DARK) {
+      return 'pi pi-moon';
+    }
+    return 'pi pi-sun';
+  }
+
+  private calculateCurrentThemeIndex() {
+    this.currentThemeIndex = (this.currentThemeIndex + 1) % THEMES.length;
   }
 }

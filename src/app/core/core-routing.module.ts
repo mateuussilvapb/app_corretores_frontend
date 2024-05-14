@@ -12,6 +12,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/modules/home/home.module').then(m => m.HomeModule),
   },
+  {
+    path: 'corretores',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('src/app/modules/corretores/corretores.module').then(
+        m => m.CorretoresModule
+      ),
+  },
 ];
 
 @NgModule({

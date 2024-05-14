@@ -1,4 +1,8 @@
+//Angular
 import { Component, EventEmitter, Output } from '@angular/core';
+
+//Internos
+import { LayoutService } from 'src/app/core/services/layout.service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,7 +12,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class TopbarComponent {
   @Output() toggle = new EventEmitter();
 
-  public toggleSidenav() {
-    this.toggle.emit();
-  }
+  constructor(public readonly layoutService: LayoutService) {}
 }

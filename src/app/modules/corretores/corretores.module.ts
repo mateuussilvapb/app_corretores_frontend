@@ -1,12 +1,19 @@
+//Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+//Internos
+import { CorretoresRoutingModule } from './corretores-routing.module';
+import { CorretoresComponent } from './pages/corretores/corretores.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [CorretoresComponent],
   imports: [
-    CommonModule
-  ]
+    //Angular
+    CommonModule,
+
+    //Internos
+    CorretoresRoutingModule,
+  ],
 })
-export class CorretoresModule { }
+export class CorretoresModule {}

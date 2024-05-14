@@ -1,1 +1,16 @@
-<p>sidebar works!</p>
+<div
+  [@slide]
+  class="layout-sidebar"
+  *ngIf="this.layoutService.isDesktop && this.layoutService.mainMenuVisible"
+>
+  <app-menu></app-menu>
+</div>
+
+<div *ngIf="this.layoutService.isMobile">
+  <p-sidebar
+    [showCloseIcon]="false"
+    [(visible)]="this.layoutService.mainMenuVisible"
+  >
+    <app-menu></app-menu
+  ></p-sidebar>
+</div>
