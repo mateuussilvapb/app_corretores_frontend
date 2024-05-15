@@ -1,6 +1,7 @@
 //Angular
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { ScreenSizeService } from './screen-size.service';
 
 interface LayoutState {
   mainMenuVisible: boolean;
@@ -19,7 +20,19 @@ export class LayoutService {
     sidebarMenuOptionsVisible: false,
   };
 
-  constructor() {}
+  constructor(private screenSizeService: ScreenSizeService) {
+    this.screenResize();
+  }
+
+  private screenResize() {
+    this.screenSizeService.width$.subscribe(width => {
+      if (width > 991) {
+        this.state.mainMenuVisible = true;
+      } else {
+        this.state.mainMenuVisible = false;
+      }
+    });
+  }
 
   showMobileSidebar() {
     this.state.sidebarMenuOptionsVisible = true;
