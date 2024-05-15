@@ -3,8 +3,14 @@
   <div>
     <app-sidebar></app-sidebar>
   </div>
-  <div>
-    <div>
+  <div
+    class="layout-main-container"
+    [ngClass]="{
+      'main-menu-opened-desktop':
+        this.layoutService.isDesktop && this.layoutService.mainMenuVisible
+    }"
+  >
+    <div class="layout-main">
       <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>

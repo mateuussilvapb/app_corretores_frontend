@@ -2,6 +2,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+//Externos
+import { CardModule } from 'primeng/card';
+
 //Internos
 import { CorretoresRoutingModule } from './corretores-routing.module';
 import { CorretoresComponent } from './pages/corretores/corretores.component';
@@ -11,6 +14,9 @@ import { CorretoresComponent } from './pages/corretores/corretores.component';
   imports: [
     //Angular
     CommonModule,
+
+    //Externos
+    CardModule,
 
     //Internos
     CorretoresRoutingModule,
