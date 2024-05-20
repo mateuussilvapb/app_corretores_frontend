@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   standalone: false,
   templateUrl: './corretores.component.html',
 })
-export class CorretoresComponent {
-
-}
+export class CorretoresComponent {}
