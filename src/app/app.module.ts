@@ -1,7 +1,9 @@
 //Angular
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Externos
@@ -19,6 +21,8 @@ import { UtilsModule } from 'src/app/utils/utils.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { DateConverterInterceptor } from './core/interceptors/date-converter.interceptor';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [AppComponent],
