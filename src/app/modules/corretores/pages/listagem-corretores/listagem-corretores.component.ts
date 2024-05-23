@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, finalize, map, startWith, switchMap, take } from 'rxjs';
 
 //Internos
@@ -15,6 +15,7 @@ import { CorretoresService } from 'src/app/modules/corretores/services/corretore
 @Component({
   standalone: false,
   templateUrl: './listagem-corretores.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListagemCorretoresComponent implements OnInit {
   public form: FormGroup;

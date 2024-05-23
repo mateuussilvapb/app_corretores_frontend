@@ -1,29 +1,28 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form)" novalidate>
-  <div>
-    <p-card header="Corretores" class="card-custom">
-      <div class="mt-4">
-        <div class="grid grid-nogutter">
-          <div class="col-12 md:col-4">
-            <app-autocomplete-corretores [control]="controlCorretor"></app-autocomplete-corretores>
-          </div>
-        </div>
-        <div class="grid grid-nogutter justify-content-end">
-          <div class="col-12 mt-2 md:col-2 md:mt-0">
-            <p-button type="submit" class="w-full" label="Consultar" styleClass="w-full" [disabled]="form.invalid" />
-          </div>
-          <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
-            <p-button label="Limpar" class="w-full" severity="warning" styleClass="w-full" (onClick)="onLimpar()" />
-          </div>
+  <p-card header="Corretores" class="card-custom">
+    <div class="mt-4">
+      <div class="grid grid-nogutter">
+        <div class="col-12 md:col-4">
+          <app-autocomplete-corretores [control]="controlCorretor"></app-autocomplete-corretores>
         </div>
       </div>
-    </p-card>
-  </div>
+      <div class="grid grid-nogutter justify-content-end">
+        <div class="col-12 mt-2 md:col-2 md:mt-0">
+          <p-button type="submit" class="w-full" label="Consultar" styleClass="w-full" [disabled]="form.invalid" />
+        </div>
+        <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
+          <p-button label="Limpar" class="w-full" severity="warning" styleClass="w-full" (onClick)="onLimpar()" />
+        </div>
+      </div>
+    </div>
+  </p-card>
 </form>
 <div class="mt-4">
   <p-card class="card-custom">
     <div class="grid grid-nogutter justify-content-end mb-2">
       <div class="col-12 mt-2 md:col-2 md:mt-0">
-        <p-button class="w-full" styleClass="w-full" label="Adicionar Corretor" />
+        <a [routerLink]="['adicionar']" class="btn-primary-link">Adicionar Corretor
+        </a>
       </div>
     </div>
     @if (loading$ | async) {
