@@ -31,20 +31,22 @@ import { CorretoresService } from 'src/app/modules/corretores/services/corretore
       @if(loading$ | async){
       <app-loading></app-loading>
       }
-      <p-floatLabel>
-        <p-autoComplete
-          delay="500"
-          class="autocomplete-corretores"
-          inputId="float-label"
-          optionLabel="descricao"
-          [forceSelection]="true"
-          (onBlur)="onBlur($event)"
-          [suggestions]="sugestoesCorretores"
-          (onSelect)="onSelectCorretor($event)"
-          (completeMethod)="onSearchCorretor($event)"
-        />
-        <label for="float-label">Corretor</label>
-      </p-floatLabel>
+      <div [hidden]="loading$ | async">
+        <p-floatLabel>
+          <p-autoComplete
+            delay="500"
+            class="autocomplete-corretores"
+            inputId="float-label"
+            optionLabel="descricao"
+            [forceSelection]="true"
+            (onBlur)="onBlur($event)"
+            [suggestions]="sugestoesCorretores"
+            (onSelect)="onSelectCorretor($event)"
+            (completeMethod)="onSearchCorretor($event)"
+          />
+          <label for="float-label">Corretor</label>
+        </p-floatLabel>
+      </div>
     </div>
   `,
   styles: [
@@ -84,7 +86,7 @@ export class AutocompleteCorretoresComponent implements OnInit {
   }
 
   public onSelectCorretor(event: AutoCompleteSelectEvent) {
-    this.control.setValue(event.value.id);
+    this.control.setValue(event.value.identificacao);
     this.control.markAsDirty();
     this.control.markAsTouched();
     this.control.updateValueAndValidity();

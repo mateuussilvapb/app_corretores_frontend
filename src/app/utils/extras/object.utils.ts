@@ -6,3 +6,5 @@ export function removeNullValues(obj: Record<string, any>) {
     return acc;
   }, {} as Record<string, any>);
 }
+
+export const isEmpty = (arr: any[]): boolean => arr == null || arr.length === 0;

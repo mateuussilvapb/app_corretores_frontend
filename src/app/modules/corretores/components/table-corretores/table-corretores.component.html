@@ -1,0 +1,38 @@
+<p-table [value]="corretores" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }"
+  [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]">
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-50 text-center surface-100 text-color" pFrozenColumn>Corretor</th>
+      <th class="text-50 text-center surface-100 text-color">Apelido</th>
+      <th class="text-50 text-center surface-100 text-color">CPF</th>
+      <th class="text-50 text-center surface-100 text-color">
+        Data de Nascimento
+      </th>
+      <th class="text-50 text-center surface-100 text-color">Total em Vales</th>
+      <th class="text-50 text-center surface-100 text-color">Opções</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-corretor>
+    <tr>
+      <td class="text-center" style="width: 19%; min-width: 5rem;" pFrozenColumn>
+        {{ corretor.nome }}
+      </td>
+      <td class="text-center" style="width: 19%; min-width: 5rem;">
+        {{ corretor.apelido }}
+      </td>
+      <td class="text-center" style="width: 19%; min-width: 5rem;">
+        {{ corretor.cpf | cpfCnpj }}
+      </td>
+      <td class="text-center" style="width: 19%; min-width: 5rem;">
+        {{ corretor.dataNascimento }}
+      </td>
+      <td class="text-center" style="width: 19%; min-width: 5rem;">{{ getTotalVales(corretor.vales) | currency : "BRL"}}
+      </td>
+      <td class="text-center" style="width: 4%; min-width: 5rem;">
+        <p-button [text]="true" icon="pi pi-ellipsis-v" styleClass="text-color"
+          (onClick)="onToggleMenu($event, corretor)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-menu #actionMenu [popup]="true"></p-menu>
