@@ -13,11 +13,10 @@ import { Corretor } from 'src/app/shared/model/corretor';
 import { CorretoresService } from 'src/app/modules/corretores/services/corretores.service';
 
 @Component({
-  selector: 'app-corretores',
   standalone: false,
-  templateUrl: './corretores.component.html',
+  templateUrl: './listagem-corretores.component.html',
 })
-export class CorretoresComponent implements OnInit {
+export class ListagemCorretoresComponent implements OnInit {
   public form: FormGroup;
   public corretores$ = new Observable<Corretor[]>();
   public readonly refresh$ = new BehaviorSubject<void>(null);

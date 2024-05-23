@@ -3,14 +3,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 //Internos
+import { ALL_ROLES } from 'src/app/shared/model/roles';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
-import { CorretoresComponent } from './pages/corretores/corretores.component';
+import { ListagemCorretoresComponent } from './pages/listagem-corretores/listagem-corretores.component';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    component: CorretoresComponent,
+    component: ListagemCorretoresComponent,
+    data: {
+      roles: [ALL_ROLES]
+    }
   },
 ];
 
@@ -18,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CorretoresRoutingModule {}
+export class CorretoresRoutingModule { }
