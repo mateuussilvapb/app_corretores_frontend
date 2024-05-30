@@ -3,15 +3,29 @@
     <div class="mt-4">
       <div class="grid grid-nogutter">
         <div class="col-12 md:col-4">
-          <app-autocomplete-corretores [control]="controlCorretor"></app-autocomplete-corretores>
+          <app-autocomplete-corretores
+            [control]="controlCorretor"
+          ></app-autocomplete-corretores>
         </div>
       </div>
       <div class="grid grid-nogutter justify-content-end">
         <div class="col-12 mt-2 md:col-2 md:mt-0">
-          <p-button type="submit" class="w-full" label="Consultar" styleClass="w-full" [disabled]="form.invalid" />
+          <p-button
+            type="submit"
+            class="w-full"
+            label="Consultar"
+            styleClass="w-full"
+            [disabled]="form.invalid"
+          />
         </div>
         <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
-          <p-button label="Limpar" class="w-full" severity="warning" styleClass="w-full" (onClick)="onLimpar()" />
+          <p-button
+            label="Limpar"
+            class="w-full"
+            severity="warning"
+            styleClass="w-full"
+            (onClick)="onLimpar()"
+          />
         </div>
       </div>
     </div>
@@ -21,7 +35,8 @@
   <p-card class="card-custom">
     <div class="grid grid-nogutter justify-content-end mb-2">
       <div class="col-12 mt-2 md:col-2 md:mt-0">
-        <a [routerLink]="['adicionar']" class="btn-primary-link">Adicionar Corretor
+        <a [routerLink]="['adicionar']" class="btn-primary-link"
+          >Adicionar Corretor
         </a>
       </div>
     </div>
@@ -29,7 +44,10 @@
     <app-loading></app-loading>
     } @if (corretores$ | async; as corretores) {
     <div>
-      <app-table-corretores [corretores]="corretores" [refresh$]="refresh$"></app-table-corretores>
+      <app-table-corretores
+        [corretores]="corretores"
+        [refresh$]="refresh$"
+      ></app-table-corretores>
       <sem-dados [data]="corretores"></sem-dados>
     </div>
     }

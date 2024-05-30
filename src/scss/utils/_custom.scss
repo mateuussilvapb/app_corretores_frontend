@@ -34,3 +34,8 @@
     border-radius: 6px;
   }
 }
+
+label.required:after {
+  content: ' *';
+  color: var(--red-500);
+}
