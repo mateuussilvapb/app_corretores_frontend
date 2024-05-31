@@ -44,10 +44,12 @@
     <app-loading></app-loading>
     } @if (corretores$ | async; as corretores) {
     <div>
+      @if(corretores && corretores.length > 0){
       <app-table-corretores
-        [corretores]="corretores"
         [refresh$]="refresh$"
+        [corretores]="corretores"
       ></app-table-corretores>
+      }
       <sem-dados [data]="corretores"></sem-dados>
     </div>
     }
