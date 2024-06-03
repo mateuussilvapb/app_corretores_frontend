@@ -1,0 +1,245 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)" novalidate>
+  <p-card header="Adicionar Corretor" class="card-custom" styleClass="h-full">
+    <p-fieldset legend="Dados Pessoais" styleClass="mt-4 mb-4">
+      <div class="grid grid-nogutter">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-8">
+          <div class="mb-2">
+            <label class="required" for="nome">Nome</label>
+          </div>
+          <input
+            id="nome"
+            type="text"
+            pInputText
+            class="w-full"
+            formControlName="nome"
+          />
+          <app-form-control-errors
+            [control]="controlNome"
+          ></app-form-control-errors>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+          <div class="mb-2">
+            <label for="apelido">Apelido</label>
+          </div>
+          <input
+            pInputText
+            type="text"
+            id="apelido"
+            class="w-full"
+            formControlName="apelido"
+          />
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+          <div class="mb-2">
+            <label for="cpf" class="required">CPF</label>
+          </div>
+          <p-inputMask
+            id="cpf"
+            type="text"
+            [unmask]="true"
+            styleClass="w-full"
+            formControlName="cpf"
+            mask="999.999.999-99"
+            placeholder="999.999.999-99"
+          />
+          <app-form-control-errors
+            [control]="controlCpf"
+          ></app-form-control-errors>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+          <div class="mb-2">
+            <label for="dtNascimento" class="required"
+              >Data de Nascimento</label
+            >
+          </div>
+          <p-calendar
+            class="w-full"
+            dataType="string"
+            id="dtNascimento"
+            styleClass="w-full"
+            formControlName="dataNascimento"
+          />
+          <app-form-control-errors
+            [control]="controlDataNascimento"
+          ></app-form-control-errors>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Endereço">
+      <div class="grid grid-nogutter" formGroupName="endereco">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+          <div class="mb-2">
+            <label class="required" for="cep">CEP</label>
+          </div>
+          <p-inputMask
+            id="cep"
+            type="text"
+            [unmask]="true"
+            mask="99999-999"
+            styleClass="w-full"
+            formControlName="cep"
+            placeholder="99999-999"
+            (onBlur)="onBlurCEP()"
+            (onComplete)="onCompleteCEP()"
+          />
+          <app-form-control-errors
+            [control]="this.controlEndereco.get('cep')"
+          ></app-form-control-errors>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-8">
+          @if (this.loadingCep$ | async) {
+          <app-loading></app-loading>
+          }
+          <div [hidden]="this.loadingCep$ | async">
+            <div class="mb-2">
+              <label class="required" for="cidade">Cidade</label>
+            </div>
+            <input
+              pInputText
+              id="cidade"
+              type="text"
+              class="w-full"
+              formControlName="cidade"
+            />
+            <app-form-control-errors
+              [control]="this.controlEndereco.get('cidade')"
+            ></app-form-control-errors>
+          </div>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+          @if (this.loadingCep$ | async) {
+          <app-loading></app-loading>
+          }
+          <div [hidden]="this.loadingCep$ | async">
+            <div class="mb-2">
+              <label class="required" for="uf">UF</label>
+            </div>
+            <p-inputMask
+              id="uf"
+              mask="aa"
+              type="text"
+              [unmask]="true"
+              placeholder="AA"
+              styleClass="w-full"
+              formControlName="uf"
+            />
+            <app-form-control-errors
+              [control]="this.controlEndereco.get('uf')"
+            ></app-form-control-errors>
+          </div>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
+          @if (this.loadingCep$ | async) {
+          <app-loading></app-loading>
+          }
+          <div [hidden]="this.loadingCep$ | async">
+            <div class="mb-2">
+              <label class="required" for="bairro">Bairro</label>
+            </div>
+            <input
+              pInputText
+              id="bairro"
+              type="text"
+              class="w-full"
+              formControlName="bairro"
+            />
+            <app-form-control-errors
+              [control]="this.controlEndereco.get('bairro')"
+            ></app-form-control-errors>
+          </div>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-8">
+          @if (this.loadingCep$ | async) {
+          <app-loading></app-loading>
+          }
+          <div [hidden]="this.loadingCep$ | async">
+            <div class="mb-2">
+              <label class="required" for="logradouro">Logradouro</label>
+            </div>
+            <input
+              pInputText
+              type="text"
+              class="w-full"
+              id="logradouro"
+              formControlName="rua"
+            />
+            <app-form-control-errors
+              [control]="this.controlEndereco.get('rua')"
+            ></app-form-control-errors>
+          </div>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-1">
+          <div class="mb-2">
+            <label class="required" for="numero">Número</label>
+          </div>
+          <input
+            pInputText
+            type="text"
+            id="numero"
+            class="w-full"
+            formControlName="numero"
+          />
+          <app-form-control-errors
+            [control]="this.controlEndereco.get('numero')"
+          ></app-form-control-errors>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+          @if (this.loadingCep$ | async) {
+          <app-loading></app-loading>
+          }
+          <div [hidden]="this.loadingCep$ | async">
+            <div class="mb-2">
+              <label for="complemento">Complemento</label>
+            </div>
+            <input
+              pInputText
+              type="text"
+              class="w-full"
+              id="complemento"
+              formControlName="complemento"
+            />
+            <app-form-control-errors
+              [control]="this.controlEndereco.get('complemento')"
+            ></app-form-control-errors>
+          </div>
+        </div>
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+          <div class="mb-2">
+            <label for="referencia">Referência</label>
+          </div>
+          <input
+            pInputText
+            type="text"
+            class="w-full"
+            id="referencia"
+            formControlName="referencia"
+          />
+          <app-form-control-errors
+            [control]="this.controlEndereco.get('referencia')"
+          ></app-form-control-errors>
+        </div>
+      </div>
+    </p-fieldset>
+    <div class="grid grid-nogutter justify-content-end pt-2">
+      <div class="col-12 mt-2 md:col-2 md:mt-0">
+        <p-button
+          type="submit"
+          class="w-full"
+          label="Adicionar"
+          styleClass="w-full"
+          [disabled]="form.invalid && this.loadingAdicionar$ | async"
+        />
+      </div>
+      <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
+        <p-button
+          label="Voltar"
+          class="w-full"
+          severity="warning"
+          styleClass="w-full"
+          (onClick)="onVoltar()"
+          [disabled]="this.loadingAdicionar$ | async"
+        />
+      </div>
+    </div>
+  </p-card>
+</form>

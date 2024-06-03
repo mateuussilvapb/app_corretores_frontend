@@ -1,11 +1,14 @@
 //Angular
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Externos
 import { MessageModule } from 'primeng/message';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
@@ -20,6 +23,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { DateConverterInterceptor } from './core/interceptors/date-converter.interceptor';
 
+registerLocaleData(ptBr);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,6 +35,7 @@ import { DateConverterInterceptor } from './core/interceptors/date-converter.int
 
     //Externos
     MessageModule,
+    ConfirmDialogModule,
     KeycloakAngularModule,
 
     //Internos
@@ -68,4 +74,4 @@ import { DateConverterInterceptor } from './core/interceptors/date-converter.int
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

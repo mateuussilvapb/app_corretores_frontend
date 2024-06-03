@@ -37,4 +37,16 @@ export const ItensMenu: ItemMenu[] = [
       },
     ],
   },
+  {
+    label: 'VALES',
+    separator: true,
+    children: [
+      {
+        label: 'Corretores',
+        separator: false,
+        icon: 'pi pi-user',
+        route: 'vales/corretores',
+      },
+    ],
+  }
 ];
