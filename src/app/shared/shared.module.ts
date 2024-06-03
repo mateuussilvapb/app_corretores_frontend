@@ -1,12 +1,13 @@
 //Angular
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 //Internos
-import { CpfCnpjPipe } from "./pipes/cpf-cnpj.pipe";
+import { CpfCnpjPipe } from './pipes/cpf-cnpj.pipe';
+import { FormatVencimentoPipe } from './pipes/format-vencimento.pipe';
 
 @NgModule({
-  declarations: [CpfCnpjPipe],
+  declarations: [CpfCnpjPipe, FormatVencimentoPipe],
   imports: [
     //Angular
     CommonModule,
@@ -15,6 +16,6 @@ import { CpfCnpjPipe } from "./pipes/cpf-cnpj.pipe";
 
     //Internos
   ],
-  exports: [CpfCnpjPipe],
+  exports: [CpfCnpjPipe, FormatVencimentoPipe],
 })
-export class SharedModule { }
+export class SharedModule {}

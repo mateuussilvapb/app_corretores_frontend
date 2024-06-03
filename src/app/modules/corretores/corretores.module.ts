@@ -22,13 +22,17 @@ import { SemDadosComponent } from 'src/app/shared/components/sem-dados/sem-dados
 import { TableCorretoresComponent } from './components/table-corretores/table-corretores.component';
 import { ListagemCorretoresComponent } from './pages/listagem-corretores/listagem-corretores.component';
 import { FormControlErrorsComponent } from 'src/app/shared/components/form-control-errors/form-control-errors.component';
+import { ListarVeiculosCorretorLoaderComponent } from './pages/listar-veiculos-corretor/listar-veiculos-corretor-loader.component';
 import { AutocompleteCorretoresComponent } from 'src/app/shared/components/autocomplete-corretores/autocomplete-corretores.component';
+import { ListarVeiculosCorretorComponent } from './pages/listar-veiculos-corretor/listar-veiculos-corretor/listar-veiculos-corretor.component';
 
 @NgModule({
   declarations: [
     AdicaoCorretorComponent,
     TableCorretoresComponent,
     ListagemCorretoresComponent,
+    ListarVeiculosCorretorComponent,
+    ListarVeiculosCorretorLoaderComponent,
   ],
   imports: [
     //Angular

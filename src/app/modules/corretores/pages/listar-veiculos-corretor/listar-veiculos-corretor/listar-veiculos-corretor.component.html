@@ -1,0 +1,70 @@
+<p-card [header]="header" class="card-custom">
+  @if (data.historico && data.historico.length > 0) {
+  <p-table
+    [rows]="10"
+    [paginator]="true"
+    [value]="data.historico"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    styleClass="p-datatable-gridlines"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-50 text-center surface-100 text-color">Marca</th>
+        <th class="text-50 text-center surface-100 text-color">Modelo</th>
+        <th class="text-50 text-center surface-100 text-color">Placa</th>
+        <th class="text-50 text-center surface-100 text-color">
+          Vencimento do Documento
+        </th>
+        <th class="text-50 text-center surface-100 text-color">
+          Vencimento Seguro
+        </th>
+        <th class="text-50 text-center surface-100 text-color">
+          Data de Atribuição
+        </th>
+        <th class="text-50 text-center surface-100 text-color">
+          Data de Devolução
+        </th>
+        <th class="text-50 text-center surface-100 text-color">Opções</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-historico>
+      <tr>
+        <td class="text-center" style="width: 14%; min-width: 5rem">
+          {{ historico.veiculo.marca }}
+        </td>
+        <td class="text-center" style="width: 14%; min-width: 5rem">
+          {{ historico.veiculo.modelo }}
+        </td>
+        <td class="text-center" style="width: 14%; min-width: 5rem">
+          {{ historico.veiculo.placa | uppercase }}
+        </td>
+        <td class="text-center" style="width: 13%; min-width: 5rem">
+          {{ historico.veiculo.vencimentoDocumento | formatVencimento }}
+        </td>
+        <td class="text-center" style="width: 13%; min-width: 5rem">
+          {{ historico.veiculo.vencimentoSeguro | formatVencimento }}
+        </td>
+        <td class="text-center" style="width: 13%; min-width: 5rem">
+          {{ historico.dataAtribuicao | date : 'dd/MM/yyyy' }}
+        </td>
+        <td class="text-center" style="width: 15%; min-width: 5rem">
+          {{
+            historico.dataDevolucao
+              ? (historico.dataDevolucao | date : 'dd/MM/yyyy')
+              : '--'
+          }}
+        </td>
+        <td class="text-center" style="width: 4%; min-width: 5rem">
+          <p-button
+            [text]="true"
+            icon="pi pi-ellipsis-v"
+            styleClass="text-color"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  }
+  <sem-dados [data]="data.historico"></sem-dados>
+</p-card>

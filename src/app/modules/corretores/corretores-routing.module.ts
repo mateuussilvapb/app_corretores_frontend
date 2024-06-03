@@ -7,6 +7,7 @@ import { ALL_ROLES } from 'src/app/shared/model/roles';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { AdicaoCorretorComponent } from './pages/adicao-corretor/adicao-corretor.component';
 import { ListagemCorretoresComponent } from './pages/listagem-corretores/listagem-corretores.component';
+import { ListarVeiculosCorretorLoaderComponent } from './pages/listar-veiculos-corretor/listar-veiculos-corretor-loader.component';
 
 const routes: Routes = [
   {
@@ -14,21 +15,29 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: ListagemCorretoresComponent,
     data: {
-      roles: [ALL_ROLES]
-    }
+      roles: [ALL_ROLES],
+    },
   },
   {
     path: 'adicionar',
     canActivate: [AuthGuard],
     component: AdicaoCorretorComponent,
     data: {
-      roles: [ALL_ROLES]
-    }
-  }
+      roles: [ALL_ROLES],
+    },
+  },
+  {
+    path: ':id/veiculos',
+    canActivate: [AuthGuard],
+    component: ListarVeiculosCorretorLoaderComponent,
+    data: {
+      roles: [ALL_ROLES],
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CorretoresRoutingModule { }
+export class CorretoresRoutingModule {}
