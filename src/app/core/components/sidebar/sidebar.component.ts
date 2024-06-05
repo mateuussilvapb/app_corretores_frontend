@@ -1,5 +1,7 @@
 //Angular
-import { Component } from '@angular/core';
+import { Subscription, filter } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 //Internos
@@ -21,8 +23,13 @@ import { LayoutService } from 'src/app/core/services/layout.service';
     ]),
   ],
 })
-export class SidebarComponent {
-  constructor(public readonly layoutService: LayoutService) {}
+export class SidebarComponent implements OnInit {
+  private routerSubscription: Subscription;
+
+  constructor(
+    private readonly router: Router,
+    public readonly layoutService: LayoutService
+  ) {}
 
   public get showMenuDesktop() {
     return this.layoutService.isDesktop && this.layoutService.mainMenuVisible;
@@ -39,5 +46,15 @@ export class SidebarComponent {
 
   set showMenuDesktop(_val: boolean) {
     this.layoutService.mainMenuVisible = _val;
+  }
+
+  ngOnInit() {
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.layoutService.isMobile) {
+          this.layoutService.mainMenuVisible = false;
+        }
+      });
   }
 }
