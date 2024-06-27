@@ -30,6 +30,12 @@ export const ItensMenu: ItemMenu[] = [
     separator: true,
     children: [
       {
+        label: 'Veículos',
+        separator: false,
+        icon: 'pi pi-car',
+        route: '/veiculos',
+      },
+      {
         label: 'Corretores',
         separator: false,
         icon: 'pi pi-user',
@@ -48,5 +54,5 @@ export const ItensMenu: ItemMenu[] = [
         route: 'vales/corretores',
       },
     ],
-  }
+  },
 ];

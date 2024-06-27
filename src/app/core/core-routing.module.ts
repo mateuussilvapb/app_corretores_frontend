@@ -20,6 +20,14 @@ const routes: Routes = [
         m => m.CorretoresModule
       ),
   },
+  {
+    path: 'veiculos',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('src/app/modules/veiculos/veiculos.module').then(
+        m => m.VeiculosModule
+      ),
+  },
 ];
 
 @NgModule({

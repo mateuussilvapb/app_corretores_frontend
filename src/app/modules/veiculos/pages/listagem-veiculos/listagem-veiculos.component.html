@@ -1,0 +1,97 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)" novalidate>
+  <p-card header="Veículos" class="card-custom">
+    <div class="mt-4">
+      <div class="grid grid-nogutter md:mb-2">
+        <div class="col-12 mb-4 md:col-3 md:pr-2 md:py-0 md:mb-0">
+          <p-floatLabel>
+            <input
+              pInputText
+              id="placa"
+              type="text"
+              class="w-full"
+              formControlName="placa"
+            />
+            <app-form-control-errors
+              [control]="controlPlaca"
+            ></app-form-control-errors>
+            <label for="placa">Placa</label>
+          </p-floatLabel>
+        </div>
+        <div class="col-12 mb-4 md:col-3 md:pr-2 md:py-0 md:mb-0">
+          <p-floatLabel>
+            <input
+              pInputText
+              id="modelo"
+              type="text"
+              class="w-full"
+              formControlName="modelo"
+            />
+            <app-form-control-errors
+              [control]="controlModelo"
+            ></app-form-control-errors>
+            <label for="modelo">Modelo</label>
+          </p-floatLabel>
+        </div>
+        <div class="col-12 mb-2 md:col-3 md:py-0 md:mb-0">
+          <p-floatLabel>
+            <input
+              pInputText
+              id="marca"
+              type="text"
+              class="w-full"
+              formControlName="marca"
+            />
+            <app-form-control-errors
+              [control]="controlMarca"
+            ></app-form-control-errors>
+            <label for="marca">Marca</label>
+          </p-floatLabel>
+        </div>
+      </div>
+      <div class="grid grid-nogutter justify-content-end">
+        <div class="col-12 mt-2 md:col-2 md:mt-0">
+          <p-button
+            type="submit"
+            class="w-full"
+            label="Consultar"
+            styleClass="w-full"
+            [disabled]="form.invalid"
+          />
+        </div>
+        <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
+          <p-button
+            label="Limpar"
+            class="w-full"
+            severity="warning"
+            styleClass="w-full"
+            (onClick)="onLimpar()"
+          />
+        </div>
+      </div>
+    </div>
+  </p-card>
+</form>
+<div class="mt-4">
+  <p-card class="card-custom">
+    <div class="grid grid-nogutter justify-content-end mb-2">
+      <div class="col-12 mt-2 md:col-2 md:mt-0">
+        <a [routerLink]="['adicionar']" class="btn-primary-link"
+          >Adicionar Veículo
+        </a>
+      </div>
+    </div>
+    @if (loading$ | async) {
+    <app-loading></app-loading>
+    } @if (veiculos$ | async; as veiculos) {
+    <div>
+      @if(veiculos && veiculos.length > 0){
+      <app-table-veiculos
+        [refresh$]="refresh$"
+        [veiculos]="veiculos"
+      ></app-table-veiculos>
+      }
+      <sem-dados [data]="veiculos"></sem-dados>
+    </div>
+    }
+  </p-card>
+</div>

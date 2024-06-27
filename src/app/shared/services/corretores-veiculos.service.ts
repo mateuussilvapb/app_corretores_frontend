@@ -23,4 +23,9 @@ export class CorretoresVeiculosService extends AbstractService<CorretorVeiculo> 
     this.http.get<CorretorVeiculoByCorretorID>(
       `${this.baseURL}/historico/corretor/${id}`
     );
+
+  getCorretorVeiculoAtualByVeiculoId = (id: string) =>
+    this.http.get<CorretorVeiculoByCorretorID>(
+      `${this.baseURL}/veiculo/${id}`
+    );
 }

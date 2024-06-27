@@ -68,24 +68,24 @@ export class ContextMenuCorretores extends ContextMenu<ContextMenuCorretoresData
       label: 'Excluir',
       icon: 'pi pi-trash',
       command: () => {
-        this.onExcluir(data.corretor.idString);
+        this.onExcluirCorretor(data.corretor.idString);
       },
       rolesAllowed: [ROLES.ADMIN, ROLES.MANAGER, ROLES.EMPLOYEE],
     },
   ];
 
-  private onExcluir(idString: string) {
+  private onExcluirCorretor(idString: string) {
     this.confirmationService.confirm({
       message:
         'Tem certeza que deseja excluir este corretor? A ação não poderá ser desfeita.',
       header: 'Confirma?',
       icon: 'pi pi-exclamation-triangle',
       acceptButtonStyleClass: 'p-button-danger',
-      accept: () => this.excluir(idString),
+      accept: () => this.excluirCorretor(idString),
     });
   }
 
-  private excluir(idString: string) {
+  private excluirCorretor(idString: string) {
     this.corretoresService.delete(idString).subscribe(() => {
       this.messageService.add({
         severity: 'success',

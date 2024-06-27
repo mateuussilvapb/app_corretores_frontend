@@ -3,7 +3,6 @@ import {
   BehaviorSubject,
   Observable,
   finalize,
-  map,
   startWith,
   switchMap,
   take,
@@ -17,27 +16,35 @@ import {
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 //Internos
-import { Corretor } from 'src/app/shared/model/corretor';
-import { CorretoresService } from 'src/app/modules/corretores/services/corretores.service';
+import { Veiculo } from 'src/app/shared/model/veiculo';
+import { VeiculosService } from 'src/app/modules/veiculos/services/veiculos.service';
 
 @Component({
   standalone: false,
-  templateUrl: './listagem-corretores.component.html',
+  templateUrl: './listagem-veiculos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListagemCorretoresComponent implements OnInit {
+export class ListagemVeiculosComponent implements OnInit {
   public form: FormGroup;
-  public corretores$: Observable<Corretor[]>;
+  public veiculos$: Observable<Veiculo[]>;
   public readonly refresh$ = new BehaviorSubject<void>(null);
   public readonly loading$ = new BehaviorSubject<boolean>(false);
 
-  get controlCorretor(): FormControl {
-    return this.form.get('idCorretor') as FormControl;
+  get controlPlaca(): FormControl {
+    return this.form.get('placa') as FormControl;
+  }
+
+  get controlModelo(): FormControl {
+    return this.form.get('modelo') as FormControl;
+  }
+
+  get controlMarca(): FormControl {
+    return this.form.get('marca') as FormControl;
   }
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly corretoresService: CorretoresService
+    private readonly veiculosService: VeiculosService
   ) {}
 
   ngOnInit(): void {
@@ -49,12 +56,11 @@ export class ListagemCorretoresComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    const value = form.value;
     this.loading$.next(true);
-    const idCorretor = form.get('idCorretor').value;
-    this.corretores$ = this.corretoresService.byID(idCorretor).pipe(
+    this.veiculos$ = this.veiculosService.findVeiculosByFilters(value).pipe(
       take(1),
-      finalize(() => this.loading$.next(false)),
-      map(corretor => [corretor])
+      finalize(() => this.loading$.next(false))
     );
   }
 
@@ -63,22 +69,24 @@ export class ListagemCorretoresComponent implements OnInit {
     this.loadData();
   }
 
-  private loadData(): void {
+  private initForm() {
+    this.form = this.fb.group({
+      placa: [null, [Validators.maxLength(7)]],
+      modelo: [null],
+      marca: [null],
+    });
+  }
+
+  private loadData() {
     this.loading$.next(true);
-    this.corretores$ = this.refresh$.pipe(
+    this.veiculos$ = this.refresh$.pipe(
       startWith(undefined),
       switchMap(() =>
-        this.corretoresService.all().pipe(
+        this.veiculosService.all().pipe(
           take(1),
           finalize(() => this.loading$.next(false))
         )
       )
     );
-  }
-
-  private initForm(): void {
-    this.form = this.fb.group({
-      idCorretor: [null, [Validators.required]],
-    });
   }
 }

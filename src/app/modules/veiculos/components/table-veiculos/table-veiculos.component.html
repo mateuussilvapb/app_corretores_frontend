@@ -1,0 +1,67 @@
+<p-table
+  [rows]="10"
+  [paginator]="true"
+  [value]="veiculos"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  styleClass="p-datatable-gridlines"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-50 text-center surface-100 text-color" pFrozenColumn>
+        Modelo
+      </th>
+      <th class="text-50 text-center surface-100 text-color">Marca</th>
+      <th class="text-50 text-center surface-100 text-color">Placa</th>
+      <th class="text-50 text-center surface-100 text-color">
+        Ano de Fabricação
+      </th>
+      <th class="text-50 text-center surface-100 text-color">Ano do Modelo</th>
+      <th class="text-50 text-center surface-100 text-color">UF Documento</th>
+      <th class="text-50 text-center surface-100 text-color">
+        Vencimento Documento
+      </th>
+      <th class="text-50 text-center surface-100 text-color">
+        Vencimento Seguro
+      </th>
+      <th class="text-50 text-center surface-100 text-color">Opções</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-veiculo>
+    <tr>
+      <td class="text-center" style="width: 12%; min-width: 5rem" pFrozenColumn>
+        {{ veiculo.modelo }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.marca }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.placa | uppercase }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.anoFabricacao }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.anoModelo }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.ufDocumento }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.vencimentoDocumento | formatVencimento }}
+      </td>
+      <td class="text-center" style="width: 12%; min-width: 5rem">
+        {{ veiculo.vencimentoSeguro | formatVencimento }}
+      </td>
+      <td class="text-center" style="width: 4%; min-width: 5rem">
+        <p-button
+          [text]="true"
+          icon="pi pi-ellipsis-v"
+          styleClass="text-color"
+          (onClick)="onToggleMenu($event, veiculo)"
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-menu #actionMenu [popup]="true"></p-menu>
