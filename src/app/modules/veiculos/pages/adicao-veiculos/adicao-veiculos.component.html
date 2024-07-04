@@ -1,0 +1,169 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form)" novalidate>
+  <p-card header="Adicionar Veículo" class="card-custom" styleClass="h-full">
+    <div class="grid grid-nogutter">
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+        <div class="mb-2">
+          <label class="required" for="placa">Placa</label>
+        </div>
+        <p-inputMask
+          id="placa"
+          type="text"
+          class="w-full"
+          mask="*******"
+          [unmask]="true"
+          styleClass="w-full"
+          placeholder="AAA1A11"
+          formControlName="placa"
+        />
+        <app-form-control-errors
+          [control]="controlPlaca"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
+        <div class="mb-2">
+          <label for="modelo" class="required">Modelo</label>
+        </div>
+        <input
+          pInputText
+          type="text"
+          id="modelo"
+          class="w-full"
+          formControlName="modelo"
+        />
+        <app-form-control-errors
+          [control]="controlModelo"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
+        <div class="mb-2">
+          <label for="marca" class="required">Marca</label>
+        </div>
+        <input
+          pInputText
+          id="marca"
+          type="text"
+          class="w-full"
+          formControlName="marca"
+        />
+        <app-form-control-errors
+          [control]="controlMarca"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+        <div class="mb-2">
+          <label for="anoFabricacao" class="required">Ano Fabricação</label>
+        </div>
+        <p-calendar
+          view="year"
+          class="w-full"
+          dateFormat="yy"
+          dataType="string"
+          id="anoFabricacao"
+          styleClass="w-full"
+          [maxDate]="dataAtual"
+          formControlName="anoFabricacao"
+        />
+        <app-form-control-errors
+          [control]="controlAnoFabricacao"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+        <div class="mb-2">
+          <label for="anoModelo" class="required">Ano Modelo</label>
+        </div>
+        <p-calendar
+          view="year"
+          class="w-full"
+          id="anoModelo"
+          dateFormat="yy"
+          dataType="string"
+          styleClass="w-full"
+          [maxDate]="dataAtual"
+          formControlName="anoModelo"
+        />
+        <app-form-control-errors
+          [control]="controlAnoModelo"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+        <div class="mb-2">
+          <label for="ufDocumento" class="required">UF Documento</label>
+        </div>
+        <p-inputMask
+          mask="aa"
+          type="text"
+          class="w-full"
+          [unmask]="true"
+          id="ufDocumento"
+          placeholder="AA"
+          styleClass="w-full"
+          formControlName="ufDocumento"
+        />
+        <app-form-control-errors
+          [control]="controlUfDocumento"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+        <div class="mb-2">
+          <label for="vencimentoDocumento" class="required"
+            >Vencimento Documento</label
+          >
+        </div>
+        <p-calendar
+          class="w-full"
+          dataType="string"
+          styleClass="w-full"
+          [minDate]="dataAtual"
+          dateFormat="dd/mm/yy"
+          id="vencimentoDocumento"
+          formControlName="vencimentoDocumento"
+          [maxDate]="maxDateAnoVencimentoSeguroEDocumento"
+        />
+        <app-form-control-errors
+          [control]="controlVencimentoDocumento"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+        <div class="mb-2">
+          <label for="vencimentoSeguro" class="required"
+            >Vencimento Seguro</label
+          >
+        </div>
+        <p-calendar
+          class="w-full"
+          dataType="string"
+          styleClass="w-full"
+          [minDate]="dataAtual"
+          dateFormat="dd/mm/yy"
+          id="vencimentoSeguro"
+          formControlName="vencimentoSeguro"
+          [maxDate]="maxDateAnoVencimentoSeguroEDocumento"
+        />
+        <app-form-control-errors
+          [control]="controlVencimentoSeguro"
+        ></app-form-control-errors>
+      </div>
+    </div>
+    <div class="grid grid-nogutter justify-content-end pt-2">
+      <div class="col-12 mt-2 md:col-2 md:mt-0">
+        <p-button
+          type="submit"
+          class="w-full"
+          label="Adicionar"
+          styleClass="w-full"
+          [disabled]="form.invalid && this.loadingAdicionar$ | async"
+        />
+      </div>
+      <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
+        <p-button
+          label="Voltar"
+          class="w-full"
+          severity="warning"
+          styleClass="w-full"
+          (onClick)="onVoltar()"
+          [disabled]="this.loadingAdicionar$ | async"
+        />
+      </div>
+    </div>
+  </p-card>
+</form>

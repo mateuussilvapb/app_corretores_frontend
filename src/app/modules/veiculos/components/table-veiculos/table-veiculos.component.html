@@ -30,10 +30,10 @@
   <ng-template pTemplate="body" let-veiculo>
     <tr>
       <td class="text-center" style="width: 12%; min-width: 5rem" pFrozenColumn>
-        {{ veiculo.modelo }}
+        {{ veiculo.modelo | uppercase }}
       </td>
       <td class="text-center" style="width: 12%; min-width: 5rem">
-        {{ veiculo.marca }}
+        {{ veiculo.marca | uppercase }}
       </td>
       <td class="text-center" style="width: 12%; min-width: 5rem">
         {{ veiculo.placa | uppercase }}
@@ -45,7 +45,7 @@
         {{ veiculo.anoModelo }}
       </td>
       <td class="text-center" style="width: 12%; min-width: 5rem">
-        {{ veiculo.ufDocumento }}
+        {{ veiculo.ufDocumento | uppercase }}
       </td>
       <td class="text-center" style="width: 12%; min-width: 5rem">
         {{ veiculo.vencimentoDocumento | formatVencimento }}

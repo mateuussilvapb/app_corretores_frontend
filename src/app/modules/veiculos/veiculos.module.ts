@@ -9,6 +9,7 @@ import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 import { FloatLabelModule } from 'primeng/floatlabel';
 
 //Internos
@@ -16,13 +17,19 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { VeiculosRoutingModule } from './veiculos-routing.module';
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { SemDadosComponent } from 'src/app/shared/components/sem-dados/sem-dados.component';
+import { AdicaoVeiculosComponent } from './pages/adicao-veiculos/adicao-veiculos.component';
 import { TableVeiculosComponent } from './components/table-veiculos/table-veiculos.component';
 import { ListagemVeiculosComponent } from './pages/listagem-veiculos/listagem-veiculos.component';
 import { FormControlErrorsComponent } from 'src/app/shared/components/form-control-errors/form-control-errors.component';
 import { AutocompleteCorretoresComponent } from 'src/app/shared/components/autocomplete-corretores/autocomplete-corretores.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
-  declarations: [ListagemVeiculosComponent, TableVeiculosComponent],
+  declarations: [
+    TableVeiculosComponent,
+    AdicaoVeiculosComponent,
+    ListagemVeiculosComponent,
+  ],
   imports: [
     //Angular
     FormsModule,
@@ -34,7 +41,9 @@ import { AutocompleteCorretoresComponent } from 'src/app/shared/components/autoc
     CardModule,
     TableModule,
     ButtonModule,
+    CalendarModule,
     InputTextModule,
+    InputMaskModule,
     FloatLabelModule,
 
     //Internos
