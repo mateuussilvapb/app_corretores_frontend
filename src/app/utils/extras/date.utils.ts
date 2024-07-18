@@ -1,3 +1,5 @@
+import { Vencimento } from 'src/app/shared/model/vencimento';
+
 export const BR_GMT_DIFF = -3;
 export const UM_DIA = 24 * 60 * 60 * 1000;
 
@@ -205,4 +207,17 @@ export const formatDatePtBr = (date: Date): string => {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   return `${day}/${month}/${date.getFullYear()}`;
+};
+
+export const isVencimentoProximo = (vencimento: Vencimento): number => {
+  const dataAtual = new Date();
+  const dataVencimento = new Date(
+    dataAtual.getFullYear(),
+    vencimento.mes - 1,
+    vencimento.dia
+  );
+  dataAtual.setHours(0, 0, 0, 0);
+  dataVencimento.setHours(0, 0, 0, 0);
+  const diferenca = dataVencimento.getTime() - dataAtual.getTime();
+  return diferenca / UM_DIA;
 };

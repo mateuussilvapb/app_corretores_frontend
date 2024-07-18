@@ -111,7 +111,7 @@ export class AdicaoVeiculosComponent implements OnInit {
       modelo: ['', [Validators.required, Validators.minLength(3)]],
       marca: ['', [Validators.required, Validators.minLength(3)]],
       vencimentoDocumento: ['', [Validators.required]],
-      vencimentoSeguro: ['', [Validators.required]],
+      vencimentoSeguro: [''],
       anoFabricacao: ['', [Validators.required]],
       anoModelo: [
         '',

@@ -28,7 +28,14 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-veiculo>
-    <tr>
+    <tr
+      [ngClass]="
+        getClassVencimento(
+          veiculo.vencimentoDocumento,
+          veiculo.vencimentoSeguro
+        )
+      "
+    >
       <td class="text-center" style="width: 12%; min-width: 5rem" pFrozenColumn>
         {{ veiculo.modelo | uppercase }}
       </td>
@@ -51,7 +58,11 @@
         {{ veiculo.vencimentoDocumento | formatVencimento }}
       </td>
       <td class="text-center" style="width: 12%; min-width: 5rem">
-        {{ veiculo.vencimentoSeguro | formatVencimento }}
+        {{
+          veiculo.vencimentoSeguro.mes != 0 && veiculo.vencimentoSeguro.dia != 0
+            ? (veiculo.vencimentoSeguro | formatVencimento)
+            : 'Veículo não assegurado'
+        }}
       </td>
       <td class="text-center" style="width: 4%; min-width: 5rem">
         <p-button
