@@ -18,6 +18,9 @@ import { VeiculosService } from 'src/app/modules/veiculos/services/veiculos.serv
 })
 export class AdicaoVeiculosComponent implements OnInit {
   public form: FormGroup;
+  public dataMaximaAnoModelo: Date;
+  public dataMaximaVencimentos: Date;
+  public dataAtual: Date = new Date();
   public readonly loadingAdicionar$ = new BehaviorSubject<boolean>(false);
 
   public get controlPlaca() {
@@ -52,17 +55,6 @@ export class AdicaoVeiculosComponent implements OnInit {
     return this.form.get('ufDocumento');
   }
 
-  public get dataAtual() {
-    return new Date();
-  }
-
-  public get maxDateAnoVencimentoSeguroEDocumento() {
-    let date = this.dataAtual;
-    date.setFullYear(date.getFullYear() + 1);
-    date.setMonth(date.getMonth() + 6);
-    return date;
-  }
-
   constructor(
     private readonly router: Router,
     private readonly fb: FormBuilder,
@@ -72,6 +64,7 @@ export class AdicaoVeiculosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadConfigDatas();
     this.initForm();
   }
 
@@ -102,7 +95,21 @@ export class AdicaoVeiculosComponent implements OnInit {
     this.location.back();
   }
 
-  public initForm(): void {
+  private loadConfigDatas() {
+    const data = new Date();
+    this.dataMaximaVencimentos = new Date(
+      data.getFullYear() + 1,
+      data.getMonth() + 6,
+      data.getDate()
+    );
+    this.dataMaximaAnoModelo = new Date(
+      data.getFullYear() + 1,
+      data.getMonth(),
+      data.getDate()
+    );
+  }
+
+  private initForm(): void {
     this.form = this.fb.group({
       placa: [
         '',
