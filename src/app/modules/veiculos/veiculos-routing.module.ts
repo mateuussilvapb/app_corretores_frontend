@@ -5,8 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 //Internos
 import { ALL_ROLES } from 'src/app/shared/model/roles';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
-import { ListagemVeiculosComponent } from './pages/listagem-veiculos/listagem-veiculos.component';
 import { AdicaoVeiculosComponent } from './pages/adicao-veiculos/adicao-veiculos.component';
+import { EdicaoVeiculosComponent } from './pages/edicao-veiculos/edicao-veiculos.component';
+import { ListagemVeiculosComponent } from './pages/listagem-veiculos/listagem-veiculos.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
     path: 'adicionar',
     canActivate: [AuthGuard],
     component: AdicaoVeiculosComponent,
+    data: {
+      roles: [ALL_ROLES],
+    },
+  },
+  {
+    path: ':id/editar',
+    canActivate: [AuthGuard],
+    component: EdicaoVeiculosComponent,
     data: {
       roles: [ALL_ROLES],
     },
