@@ -132,37 +132,7 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
           this.dataSource$ = this.veiculosService.byID(this.idVeiculo).pipe(
             takeUntil(this.destroy$),
             tap(veiculo => {
-              const dataAtual = new Date();
-              const dataVencimentoSeguro = new Date(
-                dataAtual.getFullYear(),
-                veiculo.vencimentoSeguro.mes - 1,
-                veiculo.vencimentoSeguro.dia
-              );
-              const dataVencimentoDocumento = new Date(
-                dataAtual.getFullYear(),
-                veiculo.vencimentoDocumento.mes - 1,
-                veiculo.vencimentoDocumento.dia
-              );
-              const anoFabricacao = new Date(
-                Number.parseInt(veiculo.anoFabricacao),
-                dataAtual.getMonth(),
-                dataAtual.getDate()
-              );
-              const anoModelo = new Date(
-                Number.parseInt(veiculo.anoModelo),
-                dataAtual.getMonth(),
-                dataAtual.getDate()
-              );
-              this.form.patchValue({
-                placa: veiculo.placa,
-                modelo: veiculo.modelo,
-                marca: veiculo.marca,
-                vencimentoDocumento: dataVencimentoDocumento,
-                vencimentoSeguro: dataVencimentoSeguro,
-                anoFabricacao: anoFabricacao,
-                anoModelo: anoModelo,
-                ufDocumento: veiculo.ufDocumento,
-              });
+              this.loadDataOnForm(veiculo);
             }),
             finalize(() => this.loadingEditar$.next(false))
           );
@@ -176,6 +146,40 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
           this.router.navigate(['/veiculos']);
         }
       });
+  }
+
+  private loadDataOnForm(veiculo: Veiculo) {
+    const dataAtual = new Date();
+    const dataVencimentoSeguro = new Date(
+      dataAtual.getFullYear(),
+      veiculo.vencimentoSeguro.mes - 1,
+      veiculo.vencimentoSeguro.dia
+    );
+    const dataVencimentoDocumento = new Date(
+      dataAtual.getFullYear(),
+      veiculo.vencimentoDocumento.mes - 1,
+      veiculo.vencimentoDocumento.dia
+    );
+    const anoFabricacao = new Date(
+      Number.parseInt(veiculo.anoFabricacao),
+      dataAtual.getMonth(),
+      dataAtual.getDate()
+    );
+    const anoModelo = new Date(
+      Number.parseInt(veiculo.anoModelo),
+      dataAtual.getMonth(),
+      dataAtual.getDate()
+    );
+    this.form.patchValue({
+      placa: veiculo.placa,
+      modelo: veiculo.modelo,
+      marca: veiculo.marca,
+      vencimentoDocumento: dataVencimentoDocumento,
+      vencimentoSeguro: dataVencimentoSeguro,
+      anoFabricacao: anoFabricacao,
+      anoModelo: anoModelo,
+      ufDocumento: veiculo.ufDocumento,
+    });
   }
 
   private initForm(): void {
