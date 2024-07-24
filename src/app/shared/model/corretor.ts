@@ -6,10 +6,11 @@ export interface Corretor {
   createdAt: string;
   createdBy: string;
   nome: string;
+  apelido?: string;
   dataNascimento: string;
   cpf: string;
   endereco: Endereco;
-  vales: Vale[];
+  vales?: Vale[];
   descricao: string;
   identificacao: string;
   idString: string;

@@ -8,9 +8,11 @@ import { CardModule } from 'primeng/card';
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
+import { AccordionModule } from 'primeng/accordion';
 import { FloatLabelModule } from 'primeng/floatlabel';
 
 //Internos
@@ -22,15 +24,21 @@ import { AdicaoVeiculosComponent } from './pages/adicao-veiculos/adicao-veiculos
 import { EdicaoVeiculosComponent } from './pages/edicao-veiculos/edicao-veiculos.component';
 import { TableVeiculosComponent } from './components/table-veiculos/table-veiculos.component';
 import { ListagemVeiculosComponent } from './pages/listagem-veiculos/listagem-veiculos.component';
+import { VisualizacaoVeiculosComponent } from './pages/visualizacao-veiculos/visualizacao-veiculos.component';
+import { DadosVeiculoComponent } from './pages/visualizacao-veiculos/components/dados-veiculo/dados-veiculo.component';
 import { FormControlErrorsComponent } from 'src/app/shared/components/form-control-errors/form-control-errors.component';
 import { AutocompleteCorretoresComponent } from 'src/app/shared/components/autocomplete-corretores/autocomplete-corretores.component';
+import { DadosCorretorAccordionComponent } from './pages/visualizacao-veiculos/components/dados-corretor-accordion/dados-corretor-accordion.component';
 
 @NgModule({
   declarations: [
+    DadosVeiculoComponent,
     TableVeiculosComponent,
     AdicaoVeiculosComponent,
     EdicaoVeiculosComponent,
     ListagemVeiculosComponent,
+    VisualizacaoVeiculosComponent,
+    DadosCorretorAccordionComponent,
   ],
   imports: [
     //Angular
@@ -43,9 +51,11 @@ import { AutocompleteCorretoresComponent } from 'src/app/shared/components/autoc
     CardModule,
     TableModule,
     ButtonModule,
+    DividerModule,
     CalendarModule,
     InputTextModule,
     InputMaskModule,
+    AccordionModule,
     FloatLabelModule,
 
     //Internos

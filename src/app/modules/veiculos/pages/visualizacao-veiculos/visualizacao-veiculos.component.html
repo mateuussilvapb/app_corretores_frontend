@@ -1,0 +1,43 @@
+@if (this.loading$ |async) {
+<app-loading></app-loading>
+} @if (this.dataSource$ | async; as dataSource) {
+
+<p-card header="Visualizar Veículo" class="card-custom" styleClass="h-full">
+  <app-dados-veiculo [veiculo]="dataSource.veiculo"></app-dados-veiculo>
+  @if (dataSource.corretorVeiculo &&
+  dataSource.corretorVeiculo.corretores.length > 0 &&
+  dataSource.corretorVeiculo.corretores; as corretores) {
+  <div class="grid grid-nogutter justify-content-end pt-2">
+    <p-accordion class="w-full">
+      @for (corretorItem of corretores; track $index) {
+      <app-dados-corretor-accordion
+        [corretorItem]="corretorItem"
+      ></app-dados-corretor-accordion>
+      }
+    </p-accordion>
+  </div>
+  }
+  <div class="grid grid-nogutter justify-content-end pt-2">
+    <div class="col-12 mt-2 md:col-2 md:mt-0">
+      <p-button
+        type="submit"
+        class="w-full"
+        label="Editar"
+        styleClass="w-full"
+        [disabled]="this.loading$ | async"
+        [routerLink]="['/veiculos', this.idVeiculo, 'editar']"
+      />
+    </div>
+    <div class="col-12 ml-0 mt-2 md:ml-2 md:col-2 md:mt-0">
+      <p-button
+        label="Voltar"
+        class="w-full"
+        severity="warning"
+        styleClass="w-full"
+        (onClick)="onVoltar()"
+        [disabled]="this.loading$ | async"
+      />
+    </div>
+  </div>
+</p-card>
+}

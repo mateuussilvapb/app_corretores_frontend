@@ -8,6 +8,7 @@ import {
   tap,
 } from 'rxjs';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -33,7 +34,7 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
   public dataSource$: Observable<Veiculo>;
   public readonly loadingEditar$ = new BehaviorSubject<boolean>(false);
 
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
   public get controlPlaca() {
     return this.form.get('placa');
@@ -70,6 +71,7 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly fb: FormBuilder,
+    private readonly location: Location,
     private readonly activatedRoute: ActivatedRoute,
     private readonly messageService: MessageService,
     private readonly veiculosService: VeiculosService
@@ -105,7 +107,11 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
   }
 
   public onVoltar() {
-    this.router.navigate(['/veiculos']);
+    try {
+      this.location.back();
+    } catch (error) {
+      this.router.navigate(['/veiculos']);
+    }
   }
 
   private loadConfigDatas() {

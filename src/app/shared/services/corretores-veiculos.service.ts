@@ -8,6 +8,7 @@ import {
   CorretorVeiculoByCorretorID,
 } from 'src/app/shared/model/corretor-veiculo';
 import { AbstractService } from './abstract.service';
+import { CorretorVeiculoGroupByVeiculoDTO } from '../model/corretor-veiculo-group-by-veiculo-DTO';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,10 @@ export class CorretoresVeiculosService extends AbstractService<CorretorVeiculo> 
     );
 
   getCorretorVeiculoAtualByVeiculoId = (id: string) =>
-    this.http.get<CorretorVeiculoByCorretorID>(
-      `${this.baseURL}/veiculo/${id}`
+    this.http.get<CorretorVeiculo>(`${this.baseURL}/veiculo/${id}`);
+
+  getCorretorVeiculoGroupByCorretorByVeiculoId = (id: string) =>
+    this.http.get<CorretorVeiculoGroupByVeiculoDTO>(
+      `${this.baseURL}/veiculo/${id}/historico-corretores`
     );
 }

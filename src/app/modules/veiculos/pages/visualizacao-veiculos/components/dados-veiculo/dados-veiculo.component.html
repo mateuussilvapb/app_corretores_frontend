@@ -1,0 +1,40 @@
+<div class="grid grid-nogutter">
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">Placa</p>
+    <b> {{ veiculo.placa | uppercase }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">Modelo</p>
+    <b> {{ veiculo.modelo | uppercase }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">Marca</p>
+    <b> {{ veiculo.marca | uppercase }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">Ano de Fabricação</p>
+    <b> {{ veiculo.anoFabricacao }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">Ano do Modelo</p>
+    <b> {{ veiculo.anoModelo }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+    <p class="m-0">UF Documento</p>
+    <b> {{ veiculo.ufDocumento | uppercase }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
+    <p class="m-0">Vencimento do Documento</p>
+    <b> {{ veiculo.vencimentoDocumento | formatVencimento }}</b>
+  </div>
+  <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
+    <p class="m-0">Vencimento do Seguro</p>
+    <b>
+      {{
+        veiculo.vencimentoSeguro.mes != 0 && veiculo.vencimentoSeguro.dia != 0
+          ? (veiculo.vencimentoSeguro | formatVencimento)
+          : 'Veículo não assegurado'
+      }}
+    </b>
+  </div>
+</div>
