@@ -29,7 +29,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-historico>
-      <tr>
+      <tr [ngClass]="getBackgroudClassRow(historico)">
         <td class="text-center" style="width: 14%; min-width: 5rem">
           {{ historico.veiculo.marca }}
         </td>

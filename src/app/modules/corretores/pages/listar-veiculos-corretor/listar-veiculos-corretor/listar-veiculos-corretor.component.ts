@@ -2,6 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 //Internos
+import { CorretorVeiculoDTO } from 'src/app/shared/model/corretor-veiculo-DTO';
 import { CorretorVeiculoByCorretorID } from 'src/app/shared/model/corretor-veiculo';
 
 @Component({
@@ -19,4 +20,11 @@ export class ListarVeiculosCorretorComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public getBackgroudClassRow(veiculo: CorretorVeiculoDTO): string {
+    if (veiculo.dataDevolucao !== null) {
+      return 'bg-green-100';
+    }
+    return 'bg-red-100';
+  }
 }

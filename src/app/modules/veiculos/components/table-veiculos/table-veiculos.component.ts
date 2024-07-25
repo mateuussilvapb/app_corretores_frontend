@@ -18,25 +18,6 @@ import { isVencimentoProximo } from 'src/app/utils/extras/date.utils';
   standalone: false,
   selector: 'app-table-veiculos',
   templateUrl: './table-veiculos.component.html',
-  styles: [
-    `
-      .vencido {
-        background-color: #ef6167;
-      }
-      .vencimento-10-dias {
-        background-color: #f3a066;
-      }
-      .vencimento-30-dias {
-        background-color: #faf265;
-      }
-      .vencimento-60-dias {
-        background-color: #52b4e4;
-      }
-      .vencimento-maior-60-dias {
-        background-color: #ffffff;
-      }
-    `,
-  ],
 })
 export class TableVeiculosComponent implements AfterViewInit {
   @Input() veiculos: Array<Veiculo> = [];
@@ -93,15 +74,15 @@ export class TableVeiculosComponent implements AfterViewInit {
       vencimentoSeguro
     );
     if (vencimento === 0) {
-      return 'vencido';
+      return 'bg-red-400';
     } else if (vencimento > 0 && vencimento <= 10) {
-      return 'vencimento-10-dias';
+      return 'bg-orange-300';
     } else if (vencimento > 10 && vencimento <= 30) {
-      return 'vencimento-30-dias';
+      return 'bg-yellow-200';
     } else if (vencimento > 30 && vencimento <= 60) {
-      return 'vencimento-60-dias';
+      return 'bg-green-100';
     } else {
-      return 'vencimento-maior-60-dias';
+      return 'bg-white';
     }
   }
 }
