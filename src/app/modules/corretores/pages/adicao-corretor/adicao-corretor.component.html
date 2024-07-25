@@ -67,7 +67,7 @@
     </p-fieldset>
     <p-fieldset legend="Endereço">
       <div class="grid grid-nogutter" formGroupName="endereco">
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
           <div class="mb-2">
             <label class="required" for="cep">CEP</label>
           </div>
@@ -148,7 +148,7 @@
             ></app-form-control-errors>
           </div>
         </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-8">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-7">
           @if (this.loadingCep$ | async) {
           <app-loading></app-loading>
           }
@@ -168,7 +168,7 @@
             ></app-form-control-errors>
           </div>
         </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-1">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
           <div class="mb-2">
             <label class="required" for="numero">Número</label>
           </div>
@@ -183,7 +183,7 @@
             [control]="this.controlEndereco.get('numero')"
           ></app-form-control-errors>
         </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
           @if (this.loadingCep$ | async) {
           <app-loading></app-loading>
           }
@@ -203,7 +203,7 @@
             ></app-form-control-errors>
           </div>
         </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+        <div class="col-12 p-0 pt-2 md:p-2 md:col-6 xl:col-9">
           <div class="mb-2">
             <label for="referencia">Referência</label>
           </div>

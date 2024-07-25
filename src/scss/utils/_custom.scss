@@ -23,6 +23,7 @@
   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
     box-shadow 0.2s;
   border-radius: var(--border-radius);
+  text-align: center;
 
   &:hover {
     border-color: var(--primary-600);

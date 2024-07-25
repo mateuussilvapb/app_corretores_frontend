@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit(form)" novalidate>
   <p-card header="Adicionar Veículo" class="card-custom" styleClass="h-full">
     <div class="grid grid-nogutter">
-      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
         <div class="mb-2">
           <label class="required" for="placa">Placa</label>
         </div>
@@ -49,43 +49,7 @@
           [control]="controlMarca"
         ></app-form-control-errors>
       </div>
-      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
-        <div class="mb-2">
-          <label for="anoFabricacao" class="required">Ano Fabricação</label>
-        </div>
-        <p-calendar
-          view="year"
-          class="w-full"
-          dateFormat="yy"
-          dataType="string"
-          id="anoFabricacao"
-          styleClass="w-full"
-          [maxDate]="dataAtual"
-          formControlName="anoFabricacao"
-        />
-        <app-form-control-errors
-          [control]="controlAnoFabricacao"
-        ></app-form-control-errors>
-      </div>
-      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
-        <div class="mb-2">
-          <label for="anoModelo" class="required">Ano Modelo</label>
-        </div>
-        <p-calendar
-          view="year"
-          class="w-full"
-          id="anoModelo"
-          dateFormat="yy"
-          dataType="string"
-          styleClass="w-full"
-          formControlName="anoModelo"
-          [maxDate]="dataMaximaAnoModelo"
-        />
-        <app-form-control-errors
-          [control]="controlAnoModelo"
-        ></app-form-control-errors>
-      </div>
-      <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
         <div class="mb-2">
           <label for="ufDocumento" class="required">UF Documento</label>
         </div>
@@ -105,6 +69,42 @@
       </div>
       <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
         <div class="mb-2">
+          <label for="anoFabricacao" class="required">Ano Fabricação</label>
+        </div>
+        <p-calendar
+          view="year"
+          class="w-full"
+          dateFormat="yy"
+          dataType="string"
+          id="anoFabricacao"
+          styleClass="w-full"
+          [maxDate]="dataAtual"
+          formControlName="anoFabricacao"
+        />
+        <app-form-control-errors
+          [control]="controlAnoFabricacao"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+        <div class="mb-2">
+          <label for="anoModelo" class="required">Ano Modelo</label>
+        </div>
+        <p-calendar
+          view="year"
+          class="w-full"
+          id="anoModelo"
+          dateFormat="yy"
+          dataType="string"
+          styleClass="w-full"
+          formControlName="anoModelo"
+          [maxDate]="dataMaximaAnoModelo"
+        />
+        <app-form-control-errors
+          [control]="controlAnoModelo"
+        ></app-form-control-errors>
+      </div>
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+        <div class="mb-2">
           <label for="vencimentoDocumento" class="required"
             >Vencimento Documento</label
           >
@@ -113,8 +113,8 @@
           class="w-full"
           dataType="string"
           styleClass="w-full"
-          [minDate]="dataAtual"
           dateFormat="dd/mm/yy"
+          [minDate]="dataAtual"
           id="vencimentoDocumento"
           [maxDate]="dataMaximaVencimentos"
           formControlName="vencimentoDocumento"
@@ -123,7 +123,7 @@
           [control]="controlVencimentoDocumento"
         ></app-form-control-errors>
       </div>
-      <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+      <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
         <div class="mb-2">
           <label for="vencimentoSeguro">Vencimento Seguro</label>
         </div>
@@ -131,9 +131,9 @@
           class="w-full"
           dataType="string"
           styleClass="w-full"
-          [minDate]="dataAtual"
           dateFormat="dd/mm/yy"
           id="vencimentoSeguro"
+          [minDate]="dataAtual"
           [maxDate]="dataMaximaVencimentos"
           formControlName="vencimentoSeguro"
         />
