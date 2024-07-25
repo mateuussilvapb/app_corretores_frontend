@@ -7,14 +7,10 @@
   @if (dataSource.corretorVeiculo &&
   dataSource.corretorVeiculo.corretores.length > 0 &&
   dataSource.corretorVeiculo.corretores; as corretores) {
-  <div class="grid grid-nogutter justify-content-end pt-2">
-    <p-accordion class="w-full">
-      @for (corretorItem of corretores; track $index) {
-      <app-dados-corretor-accordion
-        [corretorItem]="corretorItem"
-      ></app-dados-corretor-accordion>
-      }
-    </p-accordion>
+  <div class="pt-2 w-full">
+    <app-dados-corretor-accordion
+      [corretores]="corretores"
+    ></app-dados-corretor-accordion>
   </div>
   }
   <div class="grid grid-nogutter justify-content-end pt-2">

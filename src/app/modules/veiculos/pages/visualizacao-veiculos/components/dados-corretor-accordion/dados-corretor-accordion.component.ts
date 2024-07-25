@@ -7,7 +7,7 @@ import { CorretorVeiculoByCorretorDTO } from 'src/app/shared/model/corretor-veic
   templateUrl: './dados-corretor-accordion.component.html',
 })
 export class DadosCorretorAccordionComponent {
-  @Input() public corretorItem: CorretorVeiculoByCorretorDTO;
+  @Input() public corretores: Array<CorretorVeiculoByCorretorDTO>;
 
   public classColorAccordion(corretor: CorretorVeiculoByCorretorDTO): string {
     if (corretor.dataDevolucao) {

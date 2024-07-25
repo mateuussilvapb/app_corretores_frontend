@@ -1,81 +1,91 @@
-<div class="my-2">
-  <p-accordionTab>
-    <ng-template pTemplate="header">
-      <span class="text-sm" [ngClass]="this.classColorAccordion(corretorItem)">
-        {{
-          corretorItem.corretor.nome +
-            ' - ' +
-            (corretorItem.dataAtribuicao | date : 'dd/MM/yyyy') +
-            (corretorItem.dataDevolucao
-              ? ' a ' + (corretorItem.dataDevolucao | date : 'dd/MM/yyyy')
-              : '')
-        }}
-      </span>
-    </ng-template>
-    <ng-template pTemplate="content">
-      <div class="grid grid-nogutter">
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
-          <p class="m-0">Corretor</p>
-          <b> {{ corretorItem.corretor.nome }}</b>
+<p-accordion class="w-full">
+  @for (corretorItem of corretores; track $index) {
+  <div class="my-2">
+    <p-accordionTab>
+      <ng-template pTemplate="header">
+        <span
+          class="text-sm"
+          [ngClass]="this.classColorAccordion(corretorItem)"
+        >
+          {{
+            corretorItem.corretor.nome +
+              ' - ' +
+              (corretorItem.dataAtribuicao | date : 'dd/MM/yyyy') +
+              (corretorItem.dataDevolucao
+                ? ' a ' + (corretorItem.dataDevolucao | date : 'dd/MM/yyyy')
+                : '')
+          }}
+        </span>
+      </ng-template>
+      <ng-template pTemplate="content">
+        <div class="grid grid-nogutter">
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-4">
+            <p class="m-0">Corretor</p>
+            <b> {{ corretorItem.corretor.nome }}</b>
+          </div>
+          @if (corretorItem.corretor.apelido) {
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+            <p class="m-0">Apelido</p>
+            <b> {{ corretorItem.corretor.apelido }}</b>
+          </div>
+          }
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
+            <p class="m-0">Data de Nascimento</p>
+            <b>
+              {{
+                corretorItem.corretor.dataNascimento | date : 'dd/MM/yyyy'
+              }}</b
+            >
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
+            <p class="m-0">Data de Atribuição</p>
+            <b> {{ corretorItem.dataAtribuicao | date : 'dd/MM/yyyy' }}</b>
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
+            <p class="m-0">Data de Devolução</p>
+            @if (corretorItem.dataDevolucao) {
+            <b> {{ corretorItem.dataDevolucao | date : 'dd/MM/yyyy' }}</b>
+            } @else {
+            <b>Não devolvido</b>
+            }
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-3">
+            <p class="m-0">CPF</p>
+            <b> {{ corretorItem.corretor.cpf | cpfCnpj }}</b>
+          </div>
         </div>
-        @if (corretorItem.corretor.apelido) {
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
-          <p class="m-0">Apelido</p>
-          <b> {{ corretorItem.corretor.apelido }}</b>
-        </div>
-        }
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
-          <p class="m-0">Data de Nascimento</p>
-          <b>
-            {{ corretorItem.corretor.dataNascimento | date : 'dd/MM/yyyy' }}</b
-          >
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
-          <p class="m-0">Data de Atribuição</p>
-          <b> {{ corretorItem.dataAtribuicao | date : 'dd/MM/yyyy' }}</b>
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-2">
-          <p class="m-0">Data de Devolução</p>
-          @if (corretorItem.dataDevolucao) {
-          <b> {{ corretorItem.dataDevolucao | date : 'dd/MM/yyyy' }}</b>
-          } @else {
-          <b>Não devolvido</b>
+        <p-divider />
+        <div class="grid grid-nogutter">
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-1">
+            <p class="m-0">UF</p>
+            <b> {{ corretorItem.corretor.endereco.uf | uppercase }}</b>
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
+            <p class="m-0">Cidade</p>
+            <b> {{ corretorItem.corretor.endereco.cidade }}</b>
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
+            <p class="m-0">Número</p>
+            <b> {{ corretorItem.corretor.endereco.numero }}</b>
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-5 xl:col-6">
+            <p class="m-0">Rua</p>
+            <b> {{ corretorItem.corretor.endereco.rua }}</b>
+          </div>
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
+            <p class="m-0">Bairro</p>
+            <b> {{ corretorItem.corretor.endereco.bairro }}</b>
+          </div>
+          @if (corretorItem.corretor.endereco.referencia) {
+          <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
+            <p class="m-0">Referência</p>
+            <b> {{ corretorItem.corretor.endereco.referencia }}</b>
+          </div>
           }
         </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-4 xl:col-3">
-          <p class="m-0">CPF</p>
-          <b> {{ corretorItem.corretor.cpf | cpfCnpj }}</b>
-        </div>
-      </div>
-      <p-divider />
-      <div class="grid grid-nogutter">
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-1">
-          <p class="m-0">UF</p>
-          <b> {{ corretorItem.corretor.endereco.uf | uppercase }}</b>
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-3">
-          <p class="m-0">Cidade</p>
-          <b> {{ corretorItem.corretor.endereco.cidade }}</b>
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-3 xl:col-2">
-          <p class="m-0">Número</p>
-          <b> {{ corretorItem.corretor.endereco.numero }}</b>
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-5 xl:col-6">
-          <p class="m-0">Rua</p>
-          <b> {{ corretorItem.corretor.endereco.rua }}</b>
-        </div>
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-2">
-          <p class="m-0">Bairro</p>
-          <b> {{ corretorItem.corretor.endereco.bairro }}</b>
-        </div>
-        @if (corretorItem.corretor.endereco.referencia) {
-        <div class="col-12 p-0 pt-2 md:p-2 md:col-6">
-          <p class="m-0">Referência</p>
-          <b> {{ corretorItem.corretor.endereco.referencia }}</b>
-        </div>
-        }
-      </div>
-    </ng-template>
-  </p-accordionTab>
-</div>
+      </ng-template>
+    </p-accordionTab>
+  </div>
+
+  }
+</p-accordion>
