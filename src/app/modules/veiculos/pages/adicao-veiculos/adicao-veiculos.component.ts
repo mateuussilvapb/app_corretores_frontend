@@ -1,9 +1,20 @@
 //Angular
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import {
+  OnInit,
+  OnDestroy,
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import {
+  Router,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  NavigationCancel,
+} from '@angular/router';
 import { Location } from '@angular/common';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 //Externos
 import { MessageService } from 'primeng/api';
@@ -16,12 +27,15 @@ import { VeiculosService } from 'src/app/modules/veiculos/services/veiculos.serv
   templateUrl: './adicao-veiculos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdicaoVeiculosComponent implements OnInit {
+export class AdicaoVeiculosComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public dataMaximaAnoModelo: Date;
   public dataMaximaVencimentos: Date;
   public dataAtual: Date = new Date();
   public readonly loadingAdicionar$ = new BehaviorSubject<boolean>(false);
+
+  private navigationInProgress = false;
+  private readonly destroy$ = new Subject<void>();
 
   public get controlPlaca() {
     return this.form.get('placa');
@@ -61,7 +75,20 @@ export class AdicaoVeiculosComponent implements OnInit {
     private readonly location: Location,
     private readonly messageService: MessageService,
     private readonly veiculosService: VeiculosService
-  ) {}
+  ) {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.navigationInProgress = true;
+      }
+      if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.navigationInProgress = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadConfigDatas();
@@ -92,7 +119,13 @@ export class AdicaoVeiculosComponent implements OnInit {
   }
 
   public onVoltar() {
+    const initialUrl = this.router.url;
     this.location.back();
+    setTimeout(() => {
+      if (this.router.url === initialUrl && !this.navigationInProgress) {
+        this.router.navigate(['/veiculos']);
+      }
+    }, 100);
   }
 
   private loadConfigDatas() {
@@ -148,5 +181,10 @@ export class AdicaoVeiculosComponent implements OnInit {
     };
 
     return obj;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

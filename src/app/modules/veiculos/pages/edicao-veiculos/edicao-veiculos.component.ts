@@ -1,13 +1,19 @@
 //Angular
 import {
-  BehaviorSubject,
-  finalize,
-  Observable,
-  Subject,
-  takeUntil,
   tap,
+  Subject,
+  finalize,
+  takeUntil,
+  Observable,
+  BehaviorSubject,
 } from 'rxjs';
-import { Router } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  NavigationCancel,
+} from '@angular/router';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -34,6 +40,7 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
   public dataSource$: Observable<Veiculo>;
   public readonly loadingEditar$ = new BehaviorSubject<boolean>(false);
 
+  private navigationInProgress = false;
   private readonly destroy$ = new Subject<void>();
 
   public get controlPlaca() {
@@ -75,7 +82,20 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
     private readonly activatedRoute: ActivatedRoute,
     private readonly messageService: MessageService,
     private readonly veiculosService: VeiculosService
-  ) {}
+  ) {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.navigationInProgress = true;
+      }
+      if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.navigationInProgress = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadConfigDatas();
@@ -107,11 +127,13 @@ export class EdicaoVeiculosComponent implements OnInit, OnDestroy {
   }
 
   public onVoltar() {
-    try {
-      this.location.back();
-    } catch (error) {
-      this.router.navigate(['/veiculos']);
-    }
+    const initialUrl = this.router.url;
+    this.location.back();
+    setTimeout(() => {
+      if (this.router.url === initialUrl && !this.navigationInProgress) {
+        this.router.navigate(['/veiculos']);
+      }
+    }, 100);
   }
 
   private loadConfigDatas() {

@@ -1,16 +1,27 @@
 //Angular
 import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
+  OnInit,
+  OnDestroy,
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import {
   FormGroup,
-  ValidationErrors,
   Validators,
+  FormControl,
+  FormBuilder,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  NavigationCancel,
+} from '@angular/router';
 import { Location } from '@angular/common';
-import { BehaviorSubject, finalize, take } from 'rxjs';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject, finalize, Subject, take, takeUntil } from 'rxjs';
 
 //Externos
 import { MessageService } from 'primeng/api';
@@ -25,10 +36,13 @@ import { CorretoresService } from 'src/app/modules/corretores/services/corretore
   templateUrl: './adicao-corretor.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdicaoCorretorComponent implements OnInit {
+export class AdicaoCorretorComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public readonly loadingCep$ = new BehaviorSubject<boolean>(false);
   public readonly loadingAdicionar$ = new BehaviorSubject<boolean>(false);
+
+  private navigationInProgress = false;
+  private readonly destroy$ = new Subject<void>();
 
   public get controlNome(): FormControl {
     return this.form.get('nome') as FormControl;
@@ -53,7 +67,20 @@ export class AdicaoCorretorComponent implements OnInit {
     private readonly cepService: CepService,
     private readonly messageService: MessageService,
     private readonly corretoresService: CorretoresService
-  ) {}
+  ) {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.navigationInProgress = true;
+      }
+      if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.navigationInProgress = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -128,7 +155,13 @@ export class AdicaoCorretorComponent implements OnInit {
   }
 
   public onVoltar() {
+    const initialUrl = this.router.url;
     this.location.back();
+    setTimeout(() => {
+      if (this.router.url === initialUrl && !this.navigationInProgress) {
+        this.router.navigate(['/corretores']);
+      }
+    }, 100);
   }
 
   private tratarCEP(response: EnderecoViaCep) {
@@ -211,5 +244,10 @@ export class AdicaoCorretorComponent implements OnInit {
       numero: [null, Validators.required],
       referencia: [null],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

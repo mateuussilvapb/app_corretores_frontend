@@ -8,11 +8,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 
 //Internos
 import { Veiculo } from 'src/app/shared/model/veiculo';
+import { Vencimento } from 'src/app/shared/model/vencimento';
+import { isVencimentoProximo } from 'src/app/utils/extras/date.utils';
 import { VeiculosService } from 'src/app/modules/veiculos/services/veiculos.service';
 import { CorretoresVeiculosService } from 'src/app/shared/services/corretores-veiculos.service';
 import { ContextMenuVeiculos } from 'src/app/modules/veiculos/context-menu/context-menu-veiculos';
-import { Vencimento } from 'src/app/shared/model/vencimento';
-import { isVencimentoProximo } from 'src/app/utils/extras/date.utils';
 
 @Component({
   standalone: false,
