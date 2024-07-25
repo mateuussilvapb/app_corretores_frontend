@@ -210,14 +210,17 @@ export const formatDatePtBr = (date: Date): string => {
 };
 
 export const isVencimentoProximo = (vencimento: Vencimento): number => {
-  const dataAtual = new Date();
-  const dataVencimento = new Date(
+  const dataAtual: Date = new Date();
+  const dataVencimento: Date = new Date(
     dataAtual.getFullYear(),
     vencimento.mes - 1,
     vencimento.dia
   );
   dataAtual.setHours(0, 0, 0, 0);
   dataVencimento.setHours(0, 0, 0, 0);
+  if (dataVencimento < dataAtual) {
+    dataVencimento.setFullYear(dataVencimento.getFullYear() + 1);
+  }
   const diferenca = dataVencimento.getTime() - dataAtual.getTime();
   return diferenca / UM_DIA;
 };
