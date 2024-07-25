@@ -42,6 +42,10 @@ export class ListagemVeiculosComponent implements OnInit {
     return this.form.get('marca') as FormControl;
   }
 
+  get controlUfDocumento(): FormControl {
+    return this.form.get('ufDocumento') as FormControl;
+  }
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly veiculosService: VeiculosService
@@ -74,6 +78,7 @@ export class ListagemVeiculosComponent implements OnInit {
       placa: [null, [Validators.maxLength(7)]],
       modelo: [null],
       marca: [null],
+      ufDocumento: [null],
     });
   }
 

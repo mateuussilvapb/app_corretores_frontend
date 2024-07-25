@@ -32,7 +32,7 @@
             <label for="modelo">Modelo</label>
           </p-floatLabel>
         </div>
-        <div class="col-12 mb-2 md:col-3 md:py-0 md:mb-0">
+        <div class="col-12 mb-4 md:col-3 md:pr-2 md:py-0 md:mb-0">
           <p-floatLabel>
             <input
               pInputText
@@ -45,6 +45,24 @@
               [control]="controlMarca"
             ></app-form-control-errors>
             <label for="marca">Marca</label>
+          </p-floatLabel>
+        </div>
+        <div class="col-12 mb-2 md:col-3 md:py-0 md:mb-0">
+          <p-floatLabel>
+            <p-inputMask
+              mask="aa"
+              type="text"
+              class="w-full"
+              [unmask]="true"
+              id="ufDocumento"
+              placeholder="AA"
+              styleClass="w-full"
+              formControlName="ufDocumento"
+            />
+            <app-form-control-errors
+              [control]="controlModelo"
+            ></app-form-control-errors>
+            <label for="ufDocumento">UF Documento</label>
           </p-floatLabel>
         </div>
       </div>
