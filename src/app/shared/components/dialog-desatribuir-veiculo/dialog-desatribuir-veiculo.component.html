@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+  <div class="grid grid-nogutter">
+    <div class="col-12">
+      <div class="mb-2">
+        <label for="dataDesatribuicao" class="required font-bold"
+          >Data desatribuição</label
+        >
+      </div>
+      <p-calendar
+        [inline]="true"
+        class="w-full"
+        dataType="string"
+        styleClass="w-full"
+        [maxDate]="dataAtual"
+        dateFormat="dd/mm/yy"
+        [minDate]="dataMinima"
+        id="dataDesatribuicao"
+        formControlName="dataDesatribuicao"
+      />
+    </div>
+  </div>
+</form>

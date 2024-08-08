@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { AccordionModule } from 'primeng/accordion';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 //Internos
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -57,6 +58,7 @@ import { DadosCorretorAccordionComponent } from './pages/visualizacao-veiculos/c
     InputMaskModule,
     AccordionModule,
     FloatLabelModule,
+    DynamicDialogModule,
 
     //Internos
     SharedModule,

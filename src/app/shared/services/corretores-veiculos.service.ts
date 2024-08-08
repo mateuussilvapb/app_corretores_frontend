@@ -32,4 +32,11 @@ export class CorretoresVeiculosService extends AbstractService<CorretorVeiculo> 
     this.http.get<CorretorVeiculoGroupByVeiculoDTO>(
       `${this.baseURL}/veiculo/${id}/historico-corretores`
     );
+
+  desatribuirVeiculo(data: any) {
+    return this.http.put(
+      `${this.baseURL}/${data.id}/devolucao`,
+      data.dataDevolucao
+    );
+  }
 }

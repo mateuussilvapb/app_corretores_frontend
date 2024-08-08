@@ -1,6 +1,8 @@
 //Angular
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+
+//Internos
 import { ScreenSizeService } from './screen-size.service';
 
 interface LayoutState {
@@ -45,6 +47,10 @@ export class LayoutService {
 
   get isDesktop() {
     return window.innerWidth > 991;
+  }
+
+  get isBigDesktop() {
+    return window.innerWidth > 1710;
   }
 
   get isMobile() {

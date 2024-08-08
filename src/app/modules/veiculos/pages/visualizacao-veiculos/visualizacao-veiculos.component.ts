@@ -4,10 +4,11 @@ import {
   finalize,
   forkJoin,
   Observable,
+  startWith,
   Subject,
+  switchMap,
   take,
   takeUntil,
-  tap,
 } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -32,7 +33,9 @@ export class VisualizacaoVeiculosComponent implements OnInit, OnDestroy {
   public idVeiculo!: string;
   public dataSource$: Observable<VeiculoCorretor>;
   private readonly destroy$ = new Subject<void>();
-  public loading$ = new BehaviorSubject<boolean>(false);
+  public readonly loading$ = new BehaviorSubject<boolean>(false);
+  public readonly refresh$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly router: Router,
@@ -50,24 +53,26 @@ export class VisualizacaoVeiculosComponent implements OnInit, OnDestroy {
   }
 
   private loadData() {
-    this.loading$.next(true);
     this.activatedRoute.params
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
         this.idVeiculo = params['id'];
         if (this.idVeiculo) {
-          this.dataSource$ = forkJoin({
-            veiculo: this.veiculosService.byID(this.idVeiculo),
-            corretorVeiculo:
-              this.corretoresVeiculosService.getCorretorVeiculoGroupByCorretorByVeiculoId(
-                this.idVeiculo
-              ),
-          }).pipe(
-            take(1),
-            tap(({ veiculo, corretorVeiculo }) => {
-              console.log(veiculo, corretorVeiculo);
-            }),
-            finalize(() => this.loading$.next(false))
+          this.loading$.next(true);
+          this.dataSource$ = this.refresh$.pipe(
+            startWith(undefined),
+            switchMap(() => {
+              return forkJoin({
+                veiculo: this.veiculosService.byID(this.idVeiculo),
+                corretorVeiculo:
+                  this.corretoresVeiculosService.getCorretorVeiculoGroupByCorretorByVeiculoId(
+                    this.idVeiculo
+                  ),
+              }).pipe(
+                take(1),
+                finalize(() => this.loading$.next(false))
+              );
+            })
           );
         }
       });

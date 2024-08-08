@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Externos
 import { MessageModule } from 'primeng/message';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -43,6 +44,7 @@ registerLocaleData(ptBr);
     AppRoutingModule,
   ],
   providers: [
+    DialogService,
     MessageService,
     ConfirmationService,
     {
@@ -74,4 +76,4 @@ registerLocaleData(ptBr);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
