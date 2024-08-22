@@ -1,14 +1,17 @@
 //Angular
 import { BehaviorSubject } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 
 //Externos
 import { KeycloakService } from 'keycloak-angular';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 //Internos
 import { Veiculo } from 'src/app/shared/model/veiculo';
 import { Vencimento } from 'src/app/shared/model/vencimento';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { isVencimentoProximo } from 'src/app/utils/extras/date.utils';
 import { VeiculosService } from 'src/app/modules/veiculos/services/veiculos.service';
 import { CorretoresVeiculosService } from 'src/app/shared/services/corretores-veiculos.service';
@@ -27,6 +30,9 @@ export class TableVeiculosComponent implements AfterViewInit {
   private contextMenu: ContextMenuVeiculos;
 
   constructor(
+    private readonly fb: FormBuilder,
+    private readonly dialogService: DialogService,
+    private readonly layoutService: LayoutService,
     private readonly messageService: MessageService,
     private readonly keycloakService: KeycloakService,
     private readonly veiculosService: VeiculosService,
@@ -37,8 +43,11 @@ export class TableVeiculosComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.contextMenu = new ContextMenuVeiculos(
       this.actionMenu,
+      this.fb,
       this.keycloakService,
       this.refresh$,
+      this.dialogService,
+      this.layoutService,
       this.messageService,
       this.veiculosService,
       this.confirmationService,
