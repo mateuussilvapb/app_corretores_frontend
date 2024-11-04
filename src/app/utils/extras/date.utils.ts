@@ -224,3 +224,22 @@ export const isVencimentoProximo = (vencimento: Vencimento): number => {
   const diferenca = dataVencimento.getTime() - dataAtual.getTime();
   return diferenca / UM_DIA;
 };
+
+export const convertToISOString = (dateTimeString: string): string => {
+  const [datePart, timePart] = dateTimeString.split(' ');
+  const [day, month, year] = datePart.split('/').map(Number);
+  const [hours, minutes] = timePart.split(':').map(Number);
+
+  // Cria um novo objeto Date com os componentes individuais
+  const date = new Date(year, month - 1, day, hours, minutes);
+
+  // Formata a data manualmente no formato ISO 8601 sem alterar o fuso horário
+  const pad = (num: number) => String(num).padStart(2, '0');
+  const isoString = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+    date.getDate()
+  )}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(
+    date.getSeconds()
+  )}`;
+
+  return isoString;
+};

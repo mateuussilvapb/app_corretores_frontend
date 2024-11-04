@@ -1,6 +1,6 @@
 //Angular
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 //Internos
 import {
@@ -9,6 +9,7 @@ import {
 } from 'src/app/shared/model/corretor-veiculo';
 import { AbstractService } from './abstract.service';
 import { CorretorVeiculoGroupByVeiculoDTO } from '../model/corretor-veiculo-group-by-veiculo-DTO';
+import { convertToISOString } from 'src/app/utils/extras/date.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +35,9 @@ export class CorretoresVeiculosService extends AbstractService<CorretorVeiculo> 
     );
 
   desatribuirVeiculo(data: any) {
-    return this.http.put(
-      `${this.baseURL}/${data.id}/devolucao`,
-      data.dataDevolucao
-    );
+    const date = convertToISOString(data.dataDevolucao);
+    return this.http.put(`${this.baseURL}/${data.id}/devolucao`, {
+      date: date,
+    });
   }
 }

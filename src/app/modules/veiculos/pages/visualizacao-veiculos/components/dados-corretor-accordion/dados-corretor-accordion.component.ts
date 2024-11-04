@@ -70,7 +70,7 @@ export class DadosCorretorAccordionComponent implements OnInit, OnDestroy {
   private initForm() {
     this.form = this.fb.group({
       id: [null, Validators.required],
-      dataDesatribuicao: [null, Validators.required],
+      dataDevolucao: [null, Validators.required],
     });
   }
 

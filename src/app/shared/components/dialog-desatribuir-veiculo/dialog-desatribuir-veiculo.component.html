@@ -2,7 +2,7 @@
   <div class="grid grid-nogutter">
     <div class="col-12">
       <div class="mb-2">
-        <label for="dataDesatribuicao" class="required font-bold"
+        <label for="dataDevolucao" class="required font-bold"
           >Data desatribuição</label
         >
       </div>
@@ -10,12 +10,14 @@
         [inline]="true"
         class="w-full"
         dataType="string"
+        [showTime]="true"
+        id="dataDevolucao"
+        [hourFormat]="'24'"
         styleClass="w-full"
         [maxDate]="dataAtual"
         dateFormat="dd/mm/yy"
         [minDate]="dataMinima"
-        id="dataDesatribuicao"
-        formControlName="dataDesatribuicao"
+        formControlName="dataDevolucao"
       />
     </div>
   </div>
